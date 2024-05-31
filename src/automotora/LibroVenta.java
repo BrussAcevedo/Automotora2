@@ -28,6 +28,8 @@ public class LibroVenta {
 		this.fechaVenta = fechaVenta;
 	}
 	
-	
+	public void guardarVenta() {
+		
+	}
 	
 }

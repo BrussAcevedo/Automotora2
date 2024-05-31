@@ -17,4 +17,6 @@ public class Cliente extends Persona{
 		this.edad=edad;
 	}
 	
+	
+	
 }
