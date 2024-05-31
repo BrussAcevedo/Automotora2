@@ -17,7 +17,7 @@ public class Main {
 		System.out.println(pagarPasajeTaxiUno);
 		
 		Bus busUno = new Bus("Negro", "ASDA52", 5);
-		//System.out.println(busUno.getCantidadDeAsientos());
+		System.out.println(busUno.getCantidadDeAsientos());
 		//System.out.println(busUno.asientosDisponibles());
 		
 		MiniBus miniBusUno = new MiniBus("Rojo","ZZZZ12", 20, "Turístico");
