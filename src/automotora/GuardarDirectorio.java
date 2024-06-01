@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GuardarDirectorio {
@@ -66,8 +65,10 @@ public class GuardarDirectorio {
 		}
 	}
 
-	public void nuevoArchivo() {
-		File newFile = new File(this.carpetaDir + "/" + nombreCarpeta + "/" + this.nombreArchivo + this.formatoArchivo);
+	public void nuevoArchivo(String nombreArchivo, String fecha, int contador) {
+		String fechaFormateada = formatoFecha(fecha);
+		File newFile = new File(
+				this.carpetaDir + "/" + nombreCarpeta + "/" + nombreArchivo+"-"+fechaFormateada +"-"+contador + this.formatoArchivo);
 		if (!newFile.exists()) {
 			try {
 				newFile.createNewFile();
@@ -85,15 +86,18 @@ public class GuardarDirectorio {
 		}
 	}
 
-	public void EscrituraArchivo(List<String> lista) {
-		File archivo = new File(this.carpetaDir + "/" + nombreCarpeta + "/" + this.nombreArchivo + this.formatoArchivo);
-
+	public void EscrituraArchivo(List<String> lista, String nombreArchivo,String fecha, int contador) {
+		String fechaFormateada = formatoFecha(fecha);
+		File archivo = new File(this.carpetaDir + "/" + nombreCarpeta + "/" + nombreArchivo+"-"+fechaFormateada+"-"+contador + this.formatoArchivo);
+					
 		try (FileWriter fw = new FileWriter(archivo); BufferedWriter bw = new BufferedWriter(fw)) {
 
-			for (String Linea : lista) {
-				bw.write(Linea);
-				bw.newLine();
-			}
+
+			String encabezado = "PATENTE, EDAD CLIENTE, FECHA VENTA, NOMBRE VENTA";
+			bw.write(encabezado);
+			bw.newLine();
+			bw.write(lista.get(contador));
+			bw.newLine();
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -101,5 +105,22 @@ public class GuardarDirectorio {
 		}
 
 	}
+	
+	public String formatoFecha(String fecha) {
+		
+		String fechaFormateada= "ErrorFormatoFecha";
+		if (fecha.matches("\\d{8}")) {
+			String dia = fecha.substring(0,2);
+			String mes = fecha.substring(2,4);
+			String anio =fecha.substring(4,8);
+			fechaFormateada = String.format("%s.%s.%s", dia,mes,anio);
+			return fechaFormateada;
+		}else {
+			return fechaFormateada ;
+		}
+			
+	
+	}
+	
 
 }
